@@ -42,12 +42,12 @@ def search():
             Label(home, font='Times 12 bold', bg="#1ab5ef",text='' + str(citywind) + ' m/s').place(x=30, y=410)
             Label(home, font='Times 12 bold', bg="#1ab5ef",text='' + str(cityweather_description)).place(x=120, y=410)
             Label(home, font='Times 12 bold',bg="#1ab5ef", text='' + str(cityhumidity) + '%').place(x=220, y=410)
+            Label(home, font='Times 12 bold', text='' + str(dt)).place(x=215, y=15)
+
 
     icon = ImageTk.PhotoImage(Image.open(f"weather_icons\\{icon}.png"))
     panel = Label(home, image=icon)
     panel.place(x=90, y=90)
-    print(icon)
-
 
 
 img = Image.open('apple-iphone-13-pro-max-2021-medium.png')
@@ -76,6 +76,7 @@ myimage.place(x=90,y=120)
 blue_image=PhotoImage(file="box.png")
 myimage=Label(image=blue_image)
 myimage.place(x=20,y=370)
+
 
 w=Label(text="Vėjas",bg="#1ab5ef",fg="white", font=("arial", 12, "bold"))
 w.place(x=30, y=385)
