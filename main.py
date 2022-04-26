@@ -4,19 +4,19 @@ from tkinter import messagebox
 import requests
 import time
 from PIL import Image, ImageTk
-
-
+import io
 
 api_key = "421e28f9e40b05f6974d0fdc39099dec"
 
 home = Tk()
 home.geometry('300x500')
-home.resizable(0, 0)
+# home.resizable(0, 0)
 home.title('Orų programėlė')
 home.iconbitmap('sunrise.ico')
 dt = time.strftime("%H:%M")
 
 def search():
+    global icon
     city = textfield.get()
     if city == '':
         return messagebox.showerror('Klaida', 'įveskite miestą')
@@ -42,7 +42,7 @@ def search():
             Label(home, font='Times 12 bold', bg="#1ab5ef",text='' + str(citywind) + ' m/s').place(x=30, y=410)
             Label(home, font='Times 12 bold', bg="#1ab5ef",text='' + str(cityweather_description)).place(x=120, y=410)
             Label(home, font='Times 12 bold',bg="#1ab5ef", text='' + str(cityhumidity) + '%').place(x=220, y=410)
-            # Label(home, font='Times 12 bold',bg="#1ab5ef", text='' + str(icon_name)).place(x=100, y=120)
+            # Label(home, font='Times 12 bold',bg="#1ab5ef", text='' + str(icon)).place(x=100, y=120)
 
 
 # def get_current_climate_icon():
@@ -53,10 +53,10 @@ def search():
 #     img_data = response.content
 #     icon = ImageTk.PhotoImage(Image.open(BytesIO(img_data)))
 
-    image = PIL.Image.open(f"weather_icons\\{icon}.png")
-    img = ImageTk.PhotoImage(image)
-    l = Label(image=img)
-    l.pack()
+    icon = PhotoImage(f"weather_icons\\01d.png")
+    # img = ImageTk.PhotoImage(icon)
+    myimage1 = Label(home, image=icon)
+    myimage1.place(x=20, y=20, width=200, height=200)
 
 
 
@@ -79,9 +79,9 @@ Search_icon=PhotoImage(file="search_icon.png")
 myimage_icon=Button(image=Search_icon, borderwidth=0, cursor="hand2", bg="#404040",command=search)
 myimage_icon.place(x=210, y=50,width=45, height=35)
 
-logo_image=PhotoImage(file="clipart248259.png")
-myimage=Label(image=logo_image)
-myimage.place(x=100,y=120)
+# logo_image=PhotoImage(file="clipart248259.png")
+# myimage=Label(image=logo_image)
+# myimage.place(x=100,y=120)
 
 blue_image=PhotoImage(file="box.png")
 myimage=Label(image=blue_image)
