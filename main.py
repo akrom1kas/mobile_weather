@@ -46,7 +46,7 @@ def search():
 
     icon = ImageTk.PhotoImage(Image.open(f"weather_icons\\{icon}.png"))
     panel = Label(home, image=icon)
-    panel.pack(side="bottom", fill="both")
+    panel.place(x=90, y=90)
 
 
 
