@@ -44,19 +44,9 @@ def search():
             Label(home, font='Times 12 bold',bg="#1ab5ef", text='' + str(cityhumidity) + '%').place(x=220, y=410)
             # Label(home, font='Times 12 bold',bg="#1ab5ef", text='' + str(icon)).place(x=100, y=120)
 
-
-# def get_current_climate_icon():
-#     global icon
-#     icon_name = x['weather'][0]["icon"]
-#     url = 'http://openweathermap.org/img/wn/{icon}.png'.format(icon=icon_name)
-#     response = requests.get(url, stream=True)
-#     img_data = response.content
-#     icon = ImageTk.PhotoImage(Image.open(BytesIO(img_data)))
-
-    icon = PhotoImage(f"weather_icons\\01d.png")
-    # img = ImageTk.PhotoImage(icon)
-    myimage1 = Label(home, image=icon)
-    myimage1.place(x=20, y=20, width=200, height=200)
+    icon = ImageTk.PhotoImage(Image.open(f"weather_icons\\{icon}.png"))
+    panel = Label(home, image=icon)
+    panel.pack(side="bottom", fill="both")
 
 
 
