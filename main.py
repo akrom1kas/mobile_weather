@@ -5,13 +5,15 @@ import requests
 import time
 from PIL import Image, ImageTk
 
+
+
 api_key = "421e28f9e40b05f6974d0fdc39099dec"
 
 home = Tk()
-home.geometry('900x800')
+home.geometry('300x500')
 home.resizable(0, 0)
 home.title('Orų programėlė')
-# home.configure(bg="#f0f0f0")
+home.iconbitmap('sunrise.ico')
 dt = time.strftime("%H:%M")
 
 def search():
@@ -29,22 +31,32 @@ def search():
         if x["cod"] :
             y = x["main"]
             z = x["weather"]
-            cityname = x["sys"]["country"]
+            icon = x['weather'][0]["icon"]
             citywind = x["wind"]["speed"]
             citytemp = y["temp"]
             cityhumidity = y["humidity"]
             cityweather_description = z[0]["description"]
 
-            Label1=Label(home, font='Helvetica 42 bold',foreground="red",text='' + str(round(citytemp)) + '°C')
-            Label1.place(x=420, y=380)
-            Label2=Label(home, font='Helvetica 21 bold', text= textfield.get())
-            Label2.place(x=420, y=320)
-            Label3=Label(home, font='Helvetica 12 bold', bg="#1ab5ef",text='' + str(citywind) + ' m/s')
-            Label3.place(x=350, y=500)
-            Label4=Label(home, font='Helvetica 12 bold', bg="#1ab5ef",text='' + str(cityweather_description))
-            Label4.place(x=440, y=500)
-            Label5 = Label(home, font='Helvetica 12 bold',bg="#1ab5ef", text='' + str(cityhumidity))
-            Label5.place(x=540, y=500)
+            Label(home, font='Times 42 bold',foreground="red",text='' + str(round(citytemp)) + '°C').place(x=100, y=230)
+            Label(home, font='Times 21 bold', text= textfield.get()).place(x=100, y=300)
+            Label(home, font='Times 12 bold', bg="#1ab5ef",text='' + str(citywind) + ' m/s').place(x=30, y=410)
+            Label(home, font='Times 12 bold', bg="#1ab5ef",text='' + str(cityweather_description)).place(x=120, y=410)
+            Label(home, font='Times 12 bold',bg="#1ab5ef", text='' + str(cityhumidity) + '%').place(x=220, y=410)
+            # Label(home, font='Times 12 bold',bg="#1ab5ef", text='' + str(icon_name)).place(x=100, y=120)
+
+
+# def get_current_climate_icon():
+#     global icon
+#     icon_name = x['weather'][0]["icon"]
+#     url = 'http://openweathermap.org/img/wn/{icon}.png'.format(icon=icon_name)
+#     response = requests.get(url, stream=True)
+#     img_data = response.content
+#     icon = ImageTk.PhotoImage(Image.open(BytesIO(img_data)))
+
+    image = PIL.Image.open(f"weather_icons\\{icon}.png")
+    img = ImageTk.PhotoImage(image)
+    l = Label(image=img)
+    l.pack()
 
 
 
@@ -52,34 +64,34 @@ img = Image.open('apple-iphone-13-pro-max-2021-medium.png')
 img = img.resize((300, 500), Image.ANTIALIAS)
 img_photo = ImageTk.PhotoImage(img)
 bg_lbl = tk.Label(home, image=img_photo)
-bg_lbl.place(x=320, y=100)
+bg_lbl.place(x=0, y=0)
 
 
 Search_image=PhotoImage(file="search.png")
 myimage=Label(image=Search_image)
-myimage.place(x=340,y=150)
+myimage.place(x=20,y=40)
 
-textfield=tk.Entry(home, justify="center",font=("poppins", 15, "bold"),bg="#404040", border=0,fg="white",)
-textfield.place(x=360, y=160,width=130, height=35)
+textfield=tk.Entry(home, justify="center",font=("Times", 15, "bold"),bg="#404040", border=0,fg="white",)
+textfield.place(x=50, y=50,width=130, height=35)
 textfield.focus()
 
 Search_icon=PhotoImage(file="search_icon.png")
 myimage_icon=Button(image=Search_icon, borderwidth=0, cursor="hand2", bg="#404040",command=search)
-myimage_icon.place(x=530, y=160,width=45, height=35)
+myimage_icon.place(x=210, y=50,width=45, height=35)
 
 logo_image=PhotoImage(file="clipart248259.png")
 myimage=Label(image=logo_image)
-myimage.place(x=420,y=220)
+myimage.place(x=100,y=120)
 
 blue_image=PhotoImage(file="box.png")
 myimage=Label(image=blue_image)
-myimage.place(x=340,y=460)
+myimage.place(x=20,y=370)
 
-w=Label(text="Vejas",bg="#1ab5ef",fg="white", font=("arial", 12, "bold"))
-w.place(x=350, y=475)
+w=Label(text="Vėjas",bg="#1ab5ef",fg="white", font=("arial", 12, "bold"))
+w.place(x=30, y=385)
 b=Label(text="Šiuo metu",bg="#1ab5ef", fg="white", font=("arial", 12, "bold"))
-b.place(x=420, y=475)
+b.place(x=100, y=385)
 r=Label(text="Drėgmė",bg="#1ab5ef",fg="white" , font=("arial", 12, "bold"))
-r.place(x=520, y=475)
+r.place(x=200, y=385)
 
 home.mainloop()
