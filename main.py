@@ -4,7 +4,6 @@ from tkinter import messagebox
 import requests
 import time
 from PIL import Image, ImageTk
-import io
 
 api_key = "421e28f9e40b05f6974d0fdc39099dec"
 
@@ -37,6 +36,10 @@ def search():
             cityhumidity = y["humidity"]
             cityweather_description = z[0]["description"]
 
+            icon = ImageTk.PhotoImage(Image.open(f"weather_icons\\{icon}.png"))
+            panel = Label(home, image=icon)
+            panel.place(x=90, y=90)
+
             Label(home, font='Times 42 bold',foreground="red",text='' + str(round(citytemp)) + '°C').place(x=100, y=230)
             Label(home, font='Times 21 bold', text= textfield.get()).place(x=110, y=300)
             Label(home, font='Times 12 bold', bg="#1ab5ef",text='' + str(citywind) + ' m/s').place(x=30, y=410)
@@ -44,18 +47,11 @@ def search():
             Label(home, font='Times 12 bold',bg="#1ab5ef", text='' + str(cityhumidity) + '%').place(x=220, y=410)
             Label(home, font='Times 12 bold', text='' + str(dt)).place(x=215, y=15)
 
-
-    icon = ImageTk.PhotoImage(Image.open(f"weather_icons\\{icon}.png"))
-    panel = Label(home, image=icon)
-    panel.place(x=90, y=90)
-
-
 img = Image.open('apple-iphone-13-pro-max-2021-medium.png')
 img = img.resize((300, 500), Image.ANTIALIAS)
 img_photo = ImageTk.PhotoImage(img)
 bg_lbl = tk.Label(home, image=img_photo)
 bg_lbl.place(x=0, y=0)
-
 
 Search_image=PhotoImage(file="search.png")
 myimage=Label(image=Search_image)
