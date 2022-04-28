@@ -9,7 +9,7 @@ api_key = "421e28f9e40b05f6974d0fdc39099dec"
 
 home = Tk()
 home.geometry('300x500')
-home.resizable(0, 0)
+# home.resizable(0, 0)
 home.title('Orų programėlė')
 home.iconbitmap('sunrise.ico')
 dt = time.strftime("%H:%M")
@@ -38,14 +38,23 @@ def search():
 
             icon = ImageTk.PhotoImage(Image.open(f"weather_icons\\{icon}.png"))
             panel = Label(home, image=icon)
-            panel.place(x=90, y=90)
+            panel.place(x=90, y=100)
 
             Label(home, font='Times 42 bold',foreground="red",text='' + str(round(citytemp)) + '°C').place(x=100, y=230)
-            Label(home, font='Times 21 bold', text= textfield.get()).place(x=110, y=300)
+            Label(home, font='Times 21 bold', text='' + textfield.get()).place(x=110, y=300)
             Label(home, font='Times 12 bold', bg="#1ab5ef",text='' + str(citywind) + ' m/s').place(x=30, y=410)
-            Label(home, font='Times 12 bold', bg="#1ab5ef",text='' + str(cityweather_description)).place(x=120, y=410)
+            Label(home, font='Times 12 bold', bg="#1ab5ef",text='' + str(cityweather_description)).place(x=100, y=410)
             Label(home, font='Times 12 bold',bg="#1ab5ef", text='' + str(cityhumidity) + '%').place(x=220, y=410)
             Label(home, font='Times 12 bold', text='' + str(dt)).place(x=215, y=15)
+
+meniu = Menu(home)
+home.config(menu=meniu)
+submeniu = Menu(meniu, tearoff = 0)
+
+meniu.add_cascade(label="Meniu", menu=submeniu)
+submeniu.add_command(
+    label='Exit',
+    command=home.destroy)
 
 img = Image.open('apple-iphone-13-pro-max-2021-medium.png')
 img = img.resize((300, 500), Image.ANTIALIAS)
@@ -72,7 +81,6 @@ myimage.place(x=90,y=120)
 blue_image=PhotoImage(file="box.png")
 myimage=Label(image=blue_image)
 myimage.place(x=20,y=370)
-
 
 w=Label(text="Vėjas",bg="#1ab5ef",fg="white", font=("arial", 12, "bold"))
 w.place(x=30, y=385)
