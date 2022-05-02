@@ -6,11 +6,8 @@ import time
 from PIL import Image, ImageTk
 
 
-api_key = "421e28f9e40b05f6974d0fdc39099dec"
-
-
 home = Tk()
-home.geometry('300x500')
+home.geometry('300x550')
 home.resizable(0, 0)
 home.title('Orų programėlė')
 home.iconbitmap('sunrise.ico')
@@ -20,7 +17,6 @@ dt = time.strftime("%H:%M")
 meniu = Menu(home)
 home.config(menu=meniu)
 submeniu = Menu(meniu, tearoff = 0)
-
 meniu.add_cascade(label="Meniu", menu=submeniu)
 submeniu.add_command(
     label='Exit',
@@ -34,6 +30,7 @@ def search():
         return messagebox.showerror('Klaida', 'įveskite miestą')
     else:
         url = "http://api.openweathermap.org/data/2.5/weather?"
+        api_key = "421e28f9e40b05f6974d0fdc39099dec"
         cityname = city
         lang = 'lt'
         units = 'Metric'
@@ -58,11 +55,10 @@ def search():
             Label(home, font='Times 12 bold', bg="#1ab5ef",text='' + str(citywind) + ' m/s').place(x=30, y=410)
             Label(home, font='Times 12 bold', bg="#1ab5ef",text='' + str(cityweather_description)).place(x=100, y=410)
             Label(home, font='Times 12 bold',bg="#1ab5ef", text='' + str(cityhumidity) + '%').place(x=220, y=410)
-            Label(home, font='Times 12 bold', text='' + str(dt)).place(x=215, y=15)
 
 
 img = Image.open('apple-iphone-13-pro-max-2021-medium.png')
-img = img.resize((300, 500), Image.ANTIALIAS)
+img = img.resize((300, 500), Image.Resampling.LANCZOS)
 img_photo = ImageTk.PhotoImage(img)
 bg_lbl = tk.Label(home, image=img_photo)
 bg_lbl.place(x=0, y=0)
@@ -87,12 +83,13 @@ blue_image=PhotoImage(file="box.png")
 myimage=Label(image=blue_image)
 myimage.place(x=20,y=370)
 
-w=Label(text="Vėjas",bg="#1ab5ef",fg="white", font=("arial", 12, "bold"))
-w.place(x=30, y=385)
-b=Label(text="Šiuo metu",bg="#1ab5ef", fg="white", font=("arial", 12, "bold"))
-b.place(x=100, y=385)
-r=Label(text="Drėgmė",bg="#1ab5ef",fg="white" , font=("arial", 12, "bold"))
-r.place(x=200, y=385)
+wind=Label(text="Vėjas",bg="#1ab5ef",fg="white", font=("arial", 12, "bold"))
+wind.place(x=30, y=385)
+description=Label(text="Šiuo metu",bg="#1ab5ef", fg="white", font=("arial", 12, "bold"))
+description.place(x=100, y=385)
+humidity=Label(text="Drėgmė",bg="#1ab5ef",fg="white" , font=("arial", 12, "bold"))
+humidity.place(x=200, y=385)
+time=Label(home, font='Times 12 bold', text='' + str(dt)).place(x=215, y=15)
 
 
 home.mainloop()
